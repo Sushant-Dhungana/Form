@@ -1,0 +1,36 @@
+
+.form{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+}
+
+.form .field input{
+  height: 30px;
+  border-radius: 10px;
+}
+
+.form .message input{
+  height: 40px;
+  border-radius: 5px;
+}
+
+
+.ant-form-item-explain-error{
+  color: red;
+}
+
+.new-form{
+  margin-top: 80px;
+  background-color: aliceblue;
+  padding-left: 80px;
+}
+.new-form input{
+  height: 40px;
+  border-radius: 5px;
+}
+
+.form .new-form .dropdown{
+  height: 45px;
+}
+
