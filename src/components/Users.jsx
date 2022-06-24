@@ -1,38 +1,33 @@
-import React, {useState, useEffect} from "react";
-
-// import data from "../data";
-
-import { Form,Input,Button } from "antd";
-
-
-
-
+import { useState, useEffect, useNavigate } from 'react';
+import { Button, Form, Input } from 'antd';
+// import data from '../data'
 
 const Users = () => {
-
-  const [initialValues, setInitialValues] = useState({
+    const [initialValues, setInitialValues] = useState({
     companyname: "",
+    website: "",
     email: "",
     phone: "",
-    website: "",
+   
   });
   const [formValues, setFormValues] = useState([]);
 
-//form submit
-const submitForm = () => {
-  setFormValues((prevFormValues) => [...prevFormValues, initialValues]);
-};
+  const handleSubmit = () => {
 
-useEffect(() => {
-  localStorage.setItem("formValues", JSON.stringify(formValues));
-}, [formValues]);
-const onFinish = (values) => {
-  console.log('Success:', values);
-};
+    setFormValues((prevFormValues) => [...prevFormValues, initialValues]);
+  }
+    useEffect(() => {
 
-const onFinishFailed = (errorInfo) => {
-  console.log('Failed:', errorInfo);
-};
+     localStorage.setItem("formValues", JSON.stringify(formValues));
+     
+  }, [formValues]);
+  const onFinish = (values) => {
+    console.log('Success:', values);
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
 
   return (
     <div>
@@ -44,186 +39,79 @@ const onFinishFailed = (errorInfo) => {
       wrapperCol={{
         span: 16,
       }}
-      complete="off"
-      className='form'
+      initialValues={{
+        remember: true,
+      }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
+      autoComplete="off" className='form'
     >
       <Form.Item
-        label="Company name*"
+        label="Company Name*"
+        name="companyname"
         rules={[
           {
             required: true,
-            message: 'Please input your username!',
+            message: 'Please enter your company name',
           },
-        ]} className="message"
+        ]}
       >
-      <Input value={initialValues.companyname}
+        <Input type="text" placeholder='Enter Company Name'  value={initialValues.companyname}
           onChange={(e) =>
-            setInitialValues({ ...initialValues, companyname: e.target.value })
-          }   />   
-          </Form.Item>
-
+             setInitialValues({ ...initialValues, companyname: e.target.value })
+           } />
+      </Form.Item>
       <Form.Item
         label="Website"
-
+        name="website"
         rules={[
           {
-            message: 'Enter valid website!',
+            required:true,
+            message: 'enter a valid website',
           },
-        ]} className="message"
+        ]}
       >
-  <Input
-          value={initialValues.website}
-          onChange={(e) =>
-            setInitialValues({ ...initialValues, website: e.target.value })
-          }
-        />      </Form.Item>
+        <Input type="url" placeholder='Enter website ' value={initialValues.website}
+             onChange={(e) =>
+               setInitialValues({ ...initialValues, website: e.target.value })
+            }/>
+      </Form.Item>
       <Form.Item
         label="Email"
-
+        name="email"
         rules={[
           {
-            required:true,
-            message: 'Enter valid email!',
+            message: 'enter a email',
           },
-        ]} className="message"
+        ]}
       >
- <input
-          value={initialValues.email}
-          onChange={(e) =>
-            setInitialValues({ ...initialValues, email: e.target.value })
-          }
-        />      </Form.Item>
+        <Input type="email" placeholder='Enter email ' onChange={(e) =>
+             setInitialValues({ ...initialValues, email: e.target.value })
+         }/>
+      </Form.Item>
       <Form.Item
         label="Phone"
-
+        name="phone"
         rules={[
           {
             required:true,
-            message: 'Enter phone!',
+            message: 'enter 10 digit phone number',
           },{
-            whitespace:false,
-            string:false,
-            numbers:true,
-          },{min:3,max:10}
-        ]} className="message"
-      >
-      <Input
-          value={initialValues.phone}
-          onChange={(e) =>
-            setInitialValues({ ...initialValues, phone: e.target.value })
+            min:10,max:10
           }
-        />      
-        </Form.Item>
-   
-      {/* {data.map((item, index)=>{
-        return(
-            <Form
-            name="basic"
-            labelCol={{
-              span: 8,
-            }}
-            wrapperCol={{
-              span: 16,
-            }}
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-            className='new-form'
-            key={index}
-          >
-            <Form.Item
-              label={item.type}
-              rules={[
-                {
-                  required: true,
-                  message: `Please input your ${item.type}!`,
-                },
-              ]}
-            ><br/>
-              <Input type="text" placeholder='e.g: HQ,Branch etc' />
-            </Form.Item>
-            <Form.Item
-              label={item.country}
-              rules={[
-                {
-                  required: true,
-                  message: `Please input your ${item.country}!`,
-                },
-              ]} 
-            ><br/>
-                <select name="cars" id="cars" className="dropdown" >
-                    <option value="usa">Usa</option>
-                    <option value="nepal">Nepal</option>
-                </select>
-            </Form.Item>
-            <Form.Item
-              label={item.Address1}
+        ]}
+      >
+        <Input type="tel" placeholder='Enter phone '  value={initialValues.phone}
+          onChange={(e) =>
+             setInitialValues({ ...initialValues, phone: e.target.value })
+           }/>
+      </Form.Item> 
 
-              rules={[
-                {
-                  required: true,
-                  message: `Please input your ${item.Address1}!`,
-                },
-              ]} 
-            ><br/>
-              <Input type="text" placeholder= 'enter Address 1'/>
-            </Form.Item>
-            <Form.Item
-              label={item.Address2}
-      
-              rules={[
-                {
-                  required: true,
-                  message: `Please input your ${item.Address2}!`,
-                },
-              ]}
-            ><br/>
-              <Input type="text" placeholder='Enter Address 2' />
-            </Form.Item>
-            <Form.Item
-              label={item.zip}
-
-              rules={[
-                {
-                  required: true,
-                  message: `Please input your ${item.zip}!`,
-                },
-              ]} 
-            ><br/>
-              <Input type="text" placeholder='enter Zip/Postal code' />
-            </Form.Item>
-            <Form.Item
-              label={item.city}
-
-              rules={[
-                {
-                  required: true,
-                  message: `Please input your ${item.city}!`,
-                },
-              ]}
-            ><br/>
-              <Input type="text" placeholder='enter city' />
-            </Form.Item>
-            <Form.Item
-              label={item.state}
-     
-              rules={[
-                {
-                  required: true,
-                  message: `Please input your ${item.state}!`,
-                },
-              ]} 
-            ><br/>
-              <Input type="text" placeholder='enter state' />
-            </Form.Item>
-            </Form>
-        )
-      })} */}
+      <div>
+            <form>
+              
+            </form>
+      </div>
 
       <Form.Item
         wrapperCol={{
@@ -231,26 +119,11 @@ const onFinishFailed = (errorInfo) => {
           span: 16,
         }}
       >
-        <Button onClick={submitForm}>
+        <Button type="primary" htmlType="submit"onClick={handleSubmit}>
           Submit
         </Button>
       </Form.Item>
     </Form>
-    {/* // <div>
-    // <form onSubmit={handleAddUserDetailsSubmit} className="form">
-    //   <label>company name</label>
-    //   <input type="text" placeholder="company name" onChange={(e)=>setCompanyname(e.target.value)} value={companyname}></input>
-    //   <small className="text-danger">Name is required.</small>
-    //   <label>Website</label>
-    //   <input type="text" placeholder="website" onChange={(e)=>setWebsite(e.target.value)} value={website}></input>
-    //   <small className="text-danger">website is required.</small>
-    //   <label>Email</label>
-    //   <input type="text" placeholder="email" onChange={(e)=>setEmail(e.target.value)} value={email}></input>
-    //   <label>Phone</label>
-    //   <input type="text" placeholder="phone" onChange={(e)=>setPhone(e.target.value)} value={phone}></input>
-    //   <button type="submit">submit</button>
-    // </form>
-    // </div> */}
     </div>
   );
 };
