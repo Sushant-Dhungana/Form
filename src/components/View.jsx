@@ -1,9 +1,9 @@
-import React from 'react'
+// import React from 'react'
 
-function View() {
-  return (
-    <div>View</div>
-  )
-}
+// function View() {
+//   return (
+//     <div>View</div>
+//   )
+// }
 
-export default View
+// export default View
