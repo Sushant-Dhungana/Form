@@ -1,14 +1,23 @@
-import { useState, useEffect, useNavigate } from "react";
+import { useState, useEffect } from "react";
 import { Button, Form, Input } from "antd";
 import AddressOne from "./AddressOne";
-// import data from '../data'
+import AddressTwo from "./AddressTwo";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Users = () => {
+  let navigate = useNavigate();
+
+
+
   const [initialValues, setInitialValues] = useState({
+    id:"",
     companyname: "",
     website: "",
     email: "",
     phone: "",
+
     officetype: "",
     country: "",
     Address1: "",
@@ -16,20 +25,49 @@ const Users = () => {
     zip: "",
     city: "",
     state: "",
+  
+    officetype2: "",
+    country2: "",
+    Address12: "",
+    Address22: "",
+    zip2: "",
+    city2: "",
+    state2: "",
+  
   });
+
   const [formValues, setFormValues] = useState([]);
+
+  const [addaddress, setAddaddress] = useState(false);
+
+
+
+  const handlePress = () =>{
+    setAddaddress((isVisible)=> !isVisible);
+  }
 
   useEffect(() => {
     localStorage.setItem("formValues", JSON.stringify(formValues));
   }, [formValues]);
+  useEffect(() => {
+  const formValues = localStorage.getItem('formvalues')
+    if(formValues){
+      setFormValues(JSON.parse(formValues));
+    }
+}, []);
   const onFinish = (values) => {
     setFormValues((prevFormValues) => [...prevFormValues, initialValues]);
     console.log("Success:", values);
+    alert('success');
   };
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+
+
+  
 
   return (
     <div>
@@ -110,6 +148,7 @@ const Users = () => {
         <Form.Item
           label="Phone"
           name="phone"
+          type="numbers"
           rules={[
             {
               required: true,
@@ -137,15 +176,26 @@ const Users = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" className="mainbtn">
             Submit
           </Button>
         </Form.Item>
       </Form>
       <div>
-        <AddressOne initialdata={initialValues} setValues={setInitialValues}/>
+        <AddressOne initialdata={initialValues} setValues={setInitialValues} />
+        {/* <AddressTwo /> */}
+        {addaddress && <div><AddressTwo initialdata={initialValues} setValues={setInitialValues}/></div>}
+        <Button onClick = {handlePress} className="toggle">{addaddress? "Remove Address -" : "Add Address +"}
+        </Button>
+       
       </div>
+      <button onClick={()=>navigate('/view')} className="viewdata">View Data</button>
     </div>
+
+
+
+
+    
   );
 };
 

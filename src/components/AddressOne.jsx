@@ -1,17 +1,13 @@
 import React,{useState} from 'react'
-import { Button, Dropdown, Form, Input } from 'antd';
-import data from '../data';
+import { Button, Form, Input } from 'antd';
 
 
 const AddressOne = ({initialdata, setValues}) => {
 
-const [fields, setFields] = useState({
-  id:1,
-  
-})
+
 
   return (
-    <div>
+    <div className='addr'>
         <h2>Address 1</h2>
   
     <Form
@@ -26,7 +22,7 @@ const [fields, setFields] = useState({
         remember: true,
       }}
     
-      autoComplete="off" 
+      autoComplete="off" className='addressone' 
   
     >
       <Form.Item
@@ -37,7 +33,7 @@ const [fields, setFields] = useState({
             required: true,
             message: 'Please enter your office type',
           },
-        ]}
+        ]} className="messageone"
       >
         <Input type="text" placeholder='e.g: HQ, branch, etc' value={initialdata.officetype} 
         onChange={(e)=>{
@@ -48,8 +44,9 @@ const [fields, setFields] = useState({
       <Form.Item
         label="Country"
         name="country"
+        className="messageone"
       >
-  <select name="country" id="country" onChange={(e)=>setValues({...initialdata, country:e.target.value})} >
+  <select name="country" className="dropdown" onChange={(e)=>setValues({...initialdata, country:e.target.value})} >
   <option value="usa">USA</option>
   <option value="nepal">Nepal</option>
   </select>
@@ -60,8 +57,8 @@ const [fields, setFields] = useState({
         name="Address1"
         rules={[
           
-        ]}
-      >
+        ]} className="messageone"
+        >
         <Input type="text" placeholder='Enter Address 1 'value={initialdata.Address1} 
         onChange={(e)=>{
           setValues({...initialdata, Address1:e.target.value})
@@ -73,6 +70,7 @@ const [fields, setFields] = useState({
         rules={[
           
         ]}
+        className="messageone"
       >
         <Input type="text" placeholder='Enter Address 2' value={initialdata.Address2} 
         onChange={(e)=>{
@@ -86,6 +84,7 @@ const [fields, setFields] = useState({
         rules={[
           
         ]}
+        className="messageone"
       >
         <Input type="text" placeholder='Enter zip/postal code' value={initialdata.zip} 
         onChange={(e)=>{
@@ -99,6 +98,7 @@ const [fields, setFields] = useState({
         rules={[
           
         ]}
+        className="messageone"
       >
         <Input type="text" placeholder='Enter city'value={initialdata.city} 
         onChange={(e)=>{
@@ -112,6 +112,7 @@ const [fields, setFields] = useState({
         rules={[
           
         ]}
+        className="messageone"
       >
         <Input type="text" placeholder='Enter State ' value={initialdata.state} 
         onChange={(e)=>{
@@ -119,16 +120,18 @@ const [fields, setFields] = useState({
         }} 
           />
       </Form.Item> 
+      <Form.Item
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+
+        </Form.Item>
       </Form>
 
 
-    
-
-     
-       <Button >+</Button>
  
-      
-       <Button>-</Button>
      
     
     </div>

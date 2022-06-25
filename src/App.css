@@ -1,7 +1,13 @@
-
+*{
+  margin: 0;
+  padding: 0;
+}
 .form{
+  background-color: rgb(245, 234, 234);
+  height: 15vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  padding-left: 30px;
 
 }
 
@@ -19,18 +25,64 @@
 .ant-form-item-explain-error{
   color: red;
 }
+.mainbtn{
+  position: absolute;
+  bottom: 100px;
+  margin-left: 70%;
+  
+  }
+.toggle{
+  margin-top: 10px;
+    height:40px;
+    width: 25%;
+    border: bisque solid;
+    border-radius: 10px;
 
-.new-form{
-  margin-top: 80px;
-  background-color: aliceblue;
-  padding-left: 80px;
+  }
+ /* for address one */
+.addr{
+  margin-top: 50px;
+  background-color: rgb(245, 234, 234);
+  height: 25vh;
+  padding-left: 30px;
 }
-.new-form input{
-  height: 40px;
-  border-radius: 5px;
+.addressone{
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.addressone .messageone input {
+  height: 35px;
+
+  
+}
+.addressone .messageone .dropdown{
+  height: 35px;
 }
 
-.form .new-form .dropdown{
-  height: 45px;
+
+
+/* address two */
+.addr2{
+  margin-top: 30px;
+  padding-left: 30px;
+  background-color:rgb(245, 234, 234);
+  height: 20vh;
+}
+.addresstwo{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.addresstwo input{
+  height: 30px;
+}
+.dropdown{
+  height: 30px;
 }
 
+/* viewbutton */
+
+.viewdata{
+  position: absolute;
+  bottom: 100px;
+}
