@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Input } from 'antd';
+import { Form, Input } from 'antd';
 
 
 const AddressTwo = ({initialdata, setValues}) => {
@@ -45,7 +45,7 @@ const AddressTwo = ({initialdata, setValues}) => {
         name="country"
         className="messageone"
       >
-  <select name="country" className="dropdown"  >
+  <select name="country" className="dropdown" onChange={(e)=>setValues({...initialdata, country2:e.target.value})} >
   <option value="usa">USA</option>
   <option value="nepal">Nepal</option>
   </select>
@@ -71,7 +71,10 @@ const AddressTwo = ({initialdata, setValues}) => {
         ]}
         className="messageone"
       >
-        <Input type="text" placeholder='Enter Address 2'      
+        <Input type="text" placeholder='Enter Address 2' value={initialdata.Address22} 
+        onChange={(e)=>{
+          setValues({...initialdata, Address22:e.target.value})
+        }}       
           />
       </Form.Item> 
       <Form.Item
@@ -82,7 +85,10 @@ const AddressTwo = ({initialdata, setValues}) => {
         ]}
         className="messageone"
       >
-        <Input type="text" placeholder='Enter zip/postal code'  
+        <Input type="text" placeholder='Enter zip/postal code' value={initialdata.zip2} 
+        onChange={(e)=>{
+          setValues({...initialdata, zip2:e.target.value})
+        }}   
           />
       </Form.Item> 
       <Form.Item
@@ -93,7 +99,10 @@ const AddressTwo = ({initialdata, setValues}) => {
         ]}
         className="messageone"
       >
-        <Input type="text" placeholder='Enter city'  
+        <Input type="text" placeholder='Enter city' value={initialdata.city2} 
+        onChange={(e)=>{
+          setValues({...initialdata, city2:e.target.value})
+        }}   
           />
       </Form.Item> 
       <Form.Item
@@ -104,7 +113,10 @@ const AddressTwo = ({initialdata, setValues}) => {
         ]}
         className="messageone"
       >
-        <Input type="text" placeholder='Enter State '  
+        <Input type="text" placeholder='Enter State ' value={initialdata.state2} 
+        onChange={(e)=>{
+          setValues({...initialdata, state2:e.target.value})
+        }}  
           />
       </Form.Item> 
       </Form>

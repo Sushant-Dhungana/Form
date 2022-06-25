@@ -3,6 +3,7 @@
   padding: 0;
 }
 .form{
+  margin-top: 10px;
   background-color: rgb(245, 234, 234);
   height: 15vh;
   display: grid;
@@ -12,11 +13,13 @@
 }
 
 .form .field input{
+
   height: 30px;
   border-radius: 10px;
 }
 
 .form  input{
+  margin-top: 3px;
   height: 40px;
   border-radius: 5px;
 }
@@ -29,7 +32,15 @@
   position: absolute;
   bottom: 100px;
   margin-left: 70%;
-  
+  height: 50px;
+  width: 80px;
+  border: none;
+  background-color: aliceblue;
+  border-radius: 10px;
+  }
+  .mainbtn:hover{
+    background-color: aqua;
+    cursor: pointer;
   }
 .toggle{
   margin-top: 10px;
@@ -39,12 +50,20 @@
     border-radius: 10px;
 
   }
+  .toggle:hover{
+    background-color: aqua;
+    cursor: pointer;
+  }
  /* for address one */
 .addr{
   margin-top: 50px;
   background-color: rgb(245, 234, 234);
   height: 25vh;
   padding-left: 30px;
+}
+.addr input{
+  margin-top: 3px;
+  border-radius: 5px;
 }
 .addressone{
 
@@ -67,7 +86,11 @@
   margin-top: 30px;
   padding-left: 30px;
   background-color:rgb(245, 234, 234);
-  height: 20vh;
+  height: 25vh;
+}
+.addr2 input{
+  margin-top: 3px;
+  border-radius: 5px;
 }
 .addresstwo{
   display: grid;
@@ -77,6 +100,7 @@
   height: 30px;
 }
 .dropdown{
+  margin-top: 3px;
   height: 30px;
 }
 
@@ -85,4 +109,14 @@
 .viewdata{
   position: absolute;
   bottom: 100px;
+  height: 50px;
+  width: 100px;
+  margin-left: 40px;
+  border: none;
+  background-color: aliceblue;
+  border-radius: 10px;
+}
+.viewdata:hover {
+  background-color: aqua;
+  cursor: pointer;
 }

@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
-import { Button, Form, Input } from "antd";
+import React, { useState, useEffect } from "react";
+import { Button, Form, Input} from "antd";
 import AddressOne from "./AddressOne";
 import AddressTwo from "./AddressTwo";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
+// import 'react-toastify/dist/ReactToastify.css';
 
 const Users = () => {
   let navigate = useNavigate();
-
-
-
+  const [form] = Form.useForm();
+    //initial values and array data structure
   const [initialValues, setInitialValues] = useState({
     id:"",
     companyname: "",
@@ -25,7 +24,7 @@ const Users = () => {
     zip: "",
     city: "",
     state: "",
-  
+
     officetype2: "",
     country2: "",
     Address12: "",
@@ -33,45 +32,46 @@ const Users = () => {
     zip2: "",
     city2: "",
     state2: "",
-  
   });
 
+  //saving the values in the state
   const [formValues, setFormValues] = useState([]);
 
   const [addaddress, setAddaddress] = useState(false);
+  //for toggle of add or remove button
+  const handlePress = () => {
+    setAddaddress((isVisible) => !isVisible);
+  };
 
-
-
-  const handlePress = () =>{
-    setAddaddress((isVisible)=> !isVisible);
-  }
-
+  //to save in the localstorage
   useEffect(() => {
-    localStorage.setItem("formValues", JSON.stringify(formValues));
+    localStorage.setItem("formValues", JSON.stringify(formValues)); //to store the object in array format
   }, [formValues]);
-  useEffect(() => {
-  const formValues = localStorage.getItem('formvalues')
-    if(formValues){
-      setFormValues(JSON.parse(formValues));
-    }
-}, []);
+  // useEffect(() => {
+  //   const formValues = localStorage.getItem("formvalues");
+  //   if (formValues) {
+  //     setFormValues(JSON.parse(formValues));
+  //   }
+  // }, []);
+
+  //to check validation on submit
   const onFinish = (values) => {
+    form.resetFields();
     setFormValues((prevFormValues) => [...prevFormValues, initialValues]);
     console.log("Success:", values);
-    alert('success');
-  };
+    alert("success");
 
+  };
+    //error if fails to submit or any form validation misses
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+    alert("failed");
   };
-
-
-
-  
 
   return (
     <div>
       <Form
+      form={form}
         name="basic"
         labelCol={{
           span: 8,
@@ -103,8 +103,8 @@ const Users = () => {
             value={initialValues.companyname}
             onChange={(e) =>
               setInitialValues({
-                ...initialValues,
-                companyname: e.target.value,
+                ...initialValues,  //spread operator to spread initialvalues
+                companyname: e.target.value, //set the value thet we type especially an event
               })
             }
           />
@@ -177,25 +177,31 @@ const Users = () => {
           }}
         >
           <Button type="primary" htmlType="submit" className="mainbtn">
-            Submit
+            Save
           </Button>
         </Form.Item>
       </Form>
       <div>
         <AddressOne initialdata={initialValues} setValues={setInitialValues} />
         {/* <AddressTwo /> */}
-        {addaddress && <div><AddressTwo initialdata={initialValues} setValues={setInitialValues}/></div>}
-        <Button onClick = {handlePress} className="toggle">{addaddress? "Remove Address -" : "Add Address +"}
+        {addaddress && (
+          <div>
+            <AddressTwo
+              initialdata={initialValues}
+              setValues={setInitialValues}
+            />
+          </div>
+        )}
+        <Button onClick={handlePress} className="toggle"> 
+        {/* condition for add address section */}
+          {addaddress ? "Remove Address -" : "Add Address +"} 
         </Button>
-       
       </div>
-      <button onClick={()=>navigate('/view')} className="viewdata">View Data</button>
+      {/* navigate to the view routes  */}
+      <button onClick={() => navigate("/view")} className="viewdata">
+        View Details
+      </button>
     </div>
-
-
-
-
-    
   );
 };
 

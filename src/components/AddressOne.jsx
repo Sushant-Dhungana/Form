@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-import { Button, Form, Input } from 'antd';
+import React from 'react'
+import {  Form, Input } from 'antd';
 
 
 const AddressOne = ({initialdata, setValues}) => {
@@ -11,6 +11,7 @@ const AddressOne = ({initialdata, setValues}) => {
         <h2>Address 1</h2>
   
     <Form
+
       name="basic"
       labelCol={{
         span: 8,
